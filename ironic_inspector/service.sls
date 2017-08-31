@@ -97,6 +97,5 @@ dnsmasq:
   - require:
     - pkg: inspector_pkgs
 
-
 {%- endif %}
 

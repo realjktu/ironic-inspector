@@ -1,10 +1,8 @@
+{%- from "ironic_inspector/map.jinja" import ironic_inspector with context -%}
 port=0
-interface=phy-baremetal
+interface=phy-inspector
 bind-interfaces
-#dhcp-range=192.168.90.150,192.168.90.200
-dhcp-range=172.100.100.100,172.100.100.200
-#enable-tftp
-tftp-root=/tftpboot
+dhcp-range={{ ironic_inspector.dhcp_pool }}
 dhcp-boot=pxelinux.0
 dhcp-sequential-ip
 
