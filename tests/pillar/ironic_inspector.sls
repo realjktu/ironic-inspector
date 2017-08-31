@@ -1,3 +1,4 @@
 ironic_inspector:
-    enabled: true
+    service:
+      enabled: true
     tftp_root: /tmp/tftp
