@@ -1,0 +1,15 @@
+Source: salt-formula-ironic-inspector
+Maintainer: moc-ironic <mos-ironic@mirantis.com>
+Section: admin
+Priority: optional
+Build-Depends: debhelper (>= 9), salt-master, python, python-yaml
+Standards-Version: 3.9.6
+Homepage: https://www.mirantis.com/
+Vcs-Browser: https://github.com/salt-formulas/salt-formula-ironic-inspector
+Vcs-Git: https://github.com/salt-formulas/salt-formula-ironic.git
+
+Package: salt-formula-ironic-inspector
+Architecture: all
+Depends: ${misc:Depends}, salt-master, reclass
+Description: ironic-inspector salt formula
+ Install and configure ironic-inspector system.

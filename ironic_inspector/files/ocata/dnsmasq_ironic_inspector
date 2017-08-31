@@ -1,0 +1,10 @@
+port=0
+interface=phy-baremetal
+bind-interfaces
+#dhcp-range=192.168.90.150,192.168.90.200
+dhcp-range=172.100.100.100,172.100.100.200
+#enable-tftp
+tftp-root=/tftpboot
+dhcp-boot=pxelinux.0
+dhcp-sequential-ip
+
