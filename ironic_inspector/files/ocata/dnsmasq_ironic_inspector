@@ -3,6 +3,6 @@ port=0
 interface=phy-inspector
 bind-interfaces
 dhcp-range={{ ironic_inspector.dhcp_pool }}
-dhcp-boot=pxelinux.0
+dhcp-boot=/pxelinux.0
 dhcp-sequential-ip
 
