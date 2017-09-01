@@ -1,0 +1,8 @@
+{%- from "ironic_inspector/map.jinja" import ironic_inspector with context -%}
+port=0
+interface=lo
+bind-interfaces
+dhcp-range={{ ironic_inspector.dhcp_pool }}
+dhcp-boot=/pxelinux.0
+dhcp-sequential-ip
+

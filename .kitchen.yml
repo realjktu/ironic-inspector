@@ -1,0 +1,71 @@
+---
+driver:
+  name: docker
+  hostname: ironic-inspector.ci.local
+  use_sudo: true
+
+
+provisioner:
+  name: salt_solo
+  salt_install: bootstrap
+  salt_bootstrap_url: https://bootstrap.saltstack.com
+  salt_version: latest
+  require_chef: false
+  log_level: debug
+  formula: ironic_inspector
+  grains:
+    noservices: True
+    service: service
+    systemd: False
+    providers:
+      service: service
+  dependencies:
+    - name: linux
+      repo: git
+      source: https://github.com/salt-formulas/salt-formula-linux
+    - name: mysql
+      repo: git
+      source: https://github.com/salt-formulas/salt-formula-mysql
+    - name: rabbitmq
+      repo: git
+      source: https://github.com/salt-formulas/salt-formula-rabbitmq
+    - name: ironic
+      repo: git
+      source: https://github.com/salt-formulas/salt-formula-ironic
+    - name: ironic-inspector
+      repo: git
+      source: https://github.com/realjktu/ironic-inspector
+  state_top:
+    base:
+      "*":
+        - linux
+        - mysql
+        - ironic_inspector
+  pillars:
+    top.sls:
+      base:
+        "*":
+          - linux_repo_openstack
+          - ironic_inspector
+  pillars-from-files:
+    linux_repo_openstack.sls: tests/pillar/repo_mcp_openstack.sls
+
+verifier:
+  name: inspec
+  sudo: true
+
+platforms:
+  - name: <%= ENV['PLATFORM'] || 'ubuntu-xenial' %>
+    driver_config:
+      image: <%= ENV['PLATFORM'] || 'trevorj/salty-whales:xenial' %>
+      platform: ubuntu
+      provision_command:
+        - useradd -s /bin/false ironic
+
+suites:
+
+  - name: ironic-inspector
+    provisioner:
+      pillars-from-files:
+        ironic_inspector.sls: tests/pillar/ironic_inspector.sls
+

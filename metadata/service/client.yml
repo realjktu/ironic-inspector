@@ -1,0 +1,7 @@
+applications:
+  - ironic_inspector
+parameters:
+  ironic_inspector:
+    client:
+      enabled: True
+
